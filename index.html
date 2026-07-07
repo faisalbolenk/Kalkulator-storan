@@ -3,53 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Otomatis</title>
+    <title>Kalkulator Storan</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; max-width: 400px; margin: auto; }
-        input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .section { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; }
-        .result { margin-top: 10px; padding: 15px; background-color: #007bff; color: white; text-align: center; font-size: 1.5em; font-weight: bold; border-radius: 4px; }
+        body { font-family: sans-serif; padding: 15px; max-width: 400px; margin: auto; }
+        .section { padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; }
+        input { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .result { padding: 10px; margin-top: 5px; background-color: #007bff; color: white; text-align: center; font-weight: bold; border-radius: 4px; }
+        .final { background-color: #28a745; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <div class="section">
-        <h3>Storan (Otomatis)</h3>
+        <h3 style="margin-top:0">Kalkulator Storan</h3>
         <label>Drop:</label>
-        <input type="number" id="drop1" oninput="hitung()" placeholder="3500">
+        <input type="number" id="drop" oninput="hitung()" placeholder="Masukkan Drop">
         <label>Kasbon:</label>
-        <input type="number" id="kasbon" oninput="hitung()" placeholder="1300">
+        <input type="number" id="kasbon" oninput="hitung()" placeholder="Masukkan Kasbon">
         <label>Storting:</label>
-        <input type="number" id="storting" oninput="hitung()" placeholder="3500">
+        <input type="number" id="storting" oninput="hitung()" placeholder="Masukkan Storting">
         <label>Transport:</label>
-        <input type="number" id="transport" oninput="hitung()" placeholder="25">
+        <input type="number" id="transport" oninput="hitung()" placeholder="Masukkan Transport">
         
         <div class="result" id="hasilStoran">Storan: 0</div>
-    </div>
-
-    <div class="section">
-        <h3>9% Drop (Otomatis)</h3>
-        <label>Drop:</label>
-        <input type="number" id="drop2" oninput="hitungPersen()" placeholder="3500">
-        
-        <div class="result" id="hasilPersen">Hasil 9%: 0</div>
+        <div class="result" id="hasil9persen">9% Drop: 0</div>
+        <div class="result final" id="hasilSelisih">Selisih: 0</div>
     </div>
 
     <script>
         function hitung() {
-            let drop = parseFloat(document.getElementById('drop1').value) || 0;
+            let drop = parseFloat(document.getElementById('drop').value) || 0;
             let kasbon = parseFloat(document.getElementById('kasbon').value) || 0;
             let storting = parseFloat(document.getElementById('storting').value) || 0;
             let transport = parseFloat(document.getElementById('transport').value) || 0;
 
-            let hasil = (drop * 0.20) + kasbon + storting - drop - transport;
-            document.getElementById('hasilStoran').innerText = "Storan: " + hasil.toLocaleString('id-ID');
-        }
+            // Hitung Storan
+            let storan = (drop * 0.20) + kasbon + storting - drop - transport;
+            
+            // Hitung 9%
+            let persen9 = drop * 0.09;
+            
+            // Hitung Selisih
+            let selisih = storan - persen9;
 
-        function hitungPersen() {
-            let drop = parseFloat(document.getElementById('drop2').value) || 0;
-            let hasil = drop * 0.09;
-            document.getElementById('hasilPersen').innerText = "Hasil 9%: " + hasil.toLocaleString('id-ID');
+            document.getElementById('hasilStoran').innerText = "Storan: " + storan.toLocaleString('id-ID');
+            document.getElementById('hasil9persen').innerText = "9% Drop: " + persen9.toLocaleString('id-ID');
+            document.getElementById('hasilSelisih').innerText = "Selisih: " + selisih.toLocaleString('id-ID');
         }
     </script>
 </body>
