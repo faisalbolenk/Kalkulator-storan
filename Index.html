@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Storan</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 400px; margin: auto; }
+        input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        .result { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border: 1px solid #dee2e6; text-align: center; font-size: 1.5em; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+
+    <h2>Kalkulator Storan</h2>
+    
+    <label>Drop:</label>
+    <input type="number" id="drop" placeholder="Contoh: 3500">
+    
+    <label>Kasbon:</label>
+    <input type="number" id="kasbon" placeholder="Contoh: 1300">
+    
+    <label>Storting:</label>
+    <input type="number" id="storting" placeholder="Contoh: 3500">
+    
+    <label>Transport:</label>
+    <input type="number" id="transport" placeholder="Contoh: 25">
+    
+    <button onclick="hitung()">Hitung Storan</button>
+
+    <div class="result" id="hasil">Storan: 0</div>
+
+    <script>
+        function hitung() {
+            let drop = parseFloat(document.getElementById('drop').value) || 0;
+            let kasbon = parseFloat(document.getElementById('kasbon').value) || 0;
+            let storting = parseFloat(document.getElementById('storting').value) || 0;
+            let transport = parseFloat(document.getElementById('transport').value) || 0;
+
+            // Rumus: (Drop * 20%) + Kasbon + Storting - Drop - Transport
+            let hasil = (drop * 0.20) + kasbon + storting - drop - transport;
+
+            document.getElementById('hasil').innerText = "Storan: " + hasil.toLocaleString('id-ID');
+        }
+    </script>
+</body>
+</html>
