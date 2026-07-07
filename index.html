@@ -3,31 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Storan</title>
+    <title>Kalkulator Storan Pati 5</title>
     <style>
-        body { font-family: sans-serif; padding: 15px; max-width: 400px; margin: auto; }
-        .section { padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; }
-        input { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .result { padding: 10px; margin-top: 5px; background-color: #007bff; color: white; text-align: center; font-weight: bold; border-radius: 4px; }
-        .final { background-color: #28a745; margin-top: 10px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f0f2f5; }
+        .container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #333; margin-bottom: 20px; }
+        label { display: block; margin-top: 10px; font-weight: 600; color: #555; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #e1e1e1; border-radius: 8px; box-sizing: border-box; transition: 0.3s; }
+        input:focus { border-color: #007bff; outline: none; }
+        .result-box { padding: 15px; margin-top: 15px; border-radius: 8px; text-align: center; font-weight: bold; }
+        .storan { background-color: #e7f3ff; color: #007bff; }
+        .persen { background-color: #fff3cd; color: #856404; }
+        .final { background-color: #d4edda; color: #155724; font-size: 1.2em; }
+        .footer { text-align: center; margin-top: 25px; font-size: 0.85em; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="section">
-        <h3 style="margin-top:0">Kalkulator Storan</h3>
-        <label>Drop:</label>
-        <input type="number" id="drop" oninput="hitung()" placeholder="Masukkan Drop">
-        <label>Kasbon:</label>
-        <input type="number" id="kasbon" oninput="hitung()" placeholder="Masukkan Kasbon">
-        <label>Storting:</label>
-        <input type="number" id="storting" oninput="hitung()" placeholder="Masukkan Storting">
-        <label>Transport:</label>
-        <input type="number" id="transport" oninput="hitung()" placeholder="Masukkan Transport">
+    <div class="container">
+        <h2>Kalkulator Storan</h2>
         
-        <div class="result" id="hasilStoran">Storan: 0</div>
-        <div class="result" id="hasil9persen">9% Drop: 0</div>
-        <div class="result final" id="hasilSelisih">Selisih: 0</div>
+        <label>Drop:</label>
+        <input type="number" id="drop" oninput="hitung()" placeholder="0">
+        
+        <label>Kasbon:</label>
+        <input type="number" id="kasbon" oninput="hitung()" placeholder="0">
+        
+        <label>Storting:</label>
+        <input type="number" id="storting" oninput="hitung()" placeholder="0">
+        
+        <label>Transport:</label>
+        <input type="number" id="transport" oninput="hitung()" placeholder="0">
+        
+        <div class="result-box storan" id="hasilStoran">Storan: 0</div>
+        <div class="result-box persen" id="hasil9persen">9% Drop: 0</div>
+        <div class="result-box final" id="hasilSelisih">Selisih: 0</div>
+
+        <div class="footer">
+            Dibuat oleh: <b>Sigit Ari Wibowo (Pati 5)</b>
+        </div>
     </div>
 
     <script>
@@ -37,13 +51,8 @@
             let storting = parseFloat(document.getElementById('storting').value) || 0;
             let transport = parseFloat(document.getElementById('transport').value) || 0;
 
-            // Hitung Storan
             let storan = (drop * 0.20) + kasbon + storting - drop - transport;
-            
-            // Hitung 9%
             let persen9 = drop * 0.09;
-            
-            // Hitung Selisih
             let selisih = storan - persen9;
 
             document.getElementById('hasilStoran').innerText = "Storan: " + storan.toLocaleString('id-ID');
