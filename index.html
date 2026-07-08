@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Storan Pati 5</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f0f2f5; }
-        .container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #333; margin-bottom: 20px; }
-        label { display: block; margin-top: 10px; font-weight: 600; color: #555; }
-        input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #e1e1e1; border-radius: 8px; box-sizing: border-box; transition: 0.3s; }
-        input:focus { border-color: #007bff; outline: none; }
-        .result-box { padding: 15px; margin-top: 15px; border-radius: 8px; text-align: center; font-weight: bold; }
-        .storan { background-color: #e7f3ff; color: #007bff; }
-        .persen { background-color: #fff3cd; color: #856404; }
-        .final { background-color: #d4edda; color: #155724; font-size: 1.2em; }
-        .footer { text-align: center; margin-top: 25px; font-size: 0.85em; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
+        body { font-family: sans-serif; background-color: #f4f7f6; padding: 15px; }
+        .container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #333; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1.1em; }
+        .result-box { padding: 15px; margin-top: 10px; border-radius: 8px; text-align: center; font-weight: bold; color: white; margin-bottom: 10px; }
+        .storan { background-color: #007bff; }
+        .persen { background-color: #28a745; }
+        .final { background-color: #dc3545; }
+        .footer { text-align: center; font-size: 0.8em; color: #888; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -23,41 +23,53 @@
     <div class="container">
         <h2>Kalkulator Storan</h2>
         
-        <label>Drop:</label>
-        <input type="number" id="drop" oninput="hitung()" placeholder="0">
-        
-        <label>Kasbon:</label>
-        <input type="number" id="kasbon" oninput="hitung()" placeholder="0">
-        
-        <label>Storting:</label>
-        <input type="number" id="storting" oninput="hitung()" placeholder="0">
-        
-        <label>Transport:</label>
-        <input type="number" id="transport" oninput="hitung()" placeholder="0">
+        <div class="input-group">
+            <label>Drop:</label>
+            <input type="number" id="drop" oninput="hitung()" placeholder="0">
+        </div>
+        <div class="input-group">
+            <label>Kasbon:</label>
+            <input type="number" id="kasbon" oninput="hitung()" placeholder="0">
+        </div>
+        <div class="input-group">
+            <label>Storting:</label>
+            <input type="number" id="storting" oninput="hitung()" placeholder="0">
+        </div>
+        <div class="input-group">
+            <label>Transport:</label>
+            <input type="number" id="transport" oninput="hitung()" placeholder="0">
+        </div>
         
         <div class="result-box storan" id="hasilStoran">Storan: 0</div>
         <div class="result-box persen" id="hasil9persen">9% Drop: 0</div>
-        <div class="result-box final" id="hasilSelisih">Selisih: 0</div>
+        <div class="result-box final" id="hasilSelisih">Tunai: 0</div>
 
-        <div class="footer">
-            Dibuat oleh: <b>Sigit Ari Wibowo (Pati 5)</b>
-        </div>
+        <div class="footer">Dibuat oleh: <b>Sigit Ari Wibowo (Pati 5)</b></div>
     </div>
 
     <script>
         function hitung() {
-            let drop = parseFloat(document.getElementById('drop').value) || 0;
-            let kasbon = parseFloat(document.getElementById('kasbon').value) || 0;
-            let storting = parseFloat(document.getElementById('storting').value) || 0;
-            let transport = parseFloat(document.getElementById('transport').value) || 0;
+            // Mengambil elemen input
+            let d = document.getElementById('drop').value;
+            let k = document.getElementById('kasbon').value;
+            let s = document.getElementById('storting').value;
+            let t = document.getElementById('transport').value;
 
+            // Mengubah ke angka (jika kosong dianggap 0)
+            let drop = parseFloat(d) || 0;
+            let kasbon = parseFloat(k) || 0;
+            let storting = parseFloat(s) || 0;
+            let transport = parseFloat(t) || 0;
+
+            // Rumus
             let storan = (drop * 0.20) + kasbon + storting - drop - transport;
             let persen9 = drop * 0.09;
-            let selisih = storan - persen9;
+            let tunai = storan - persen9;
 
+            // Menampilkan hasil
             document.getElementById('hasilStoran').innerText = "Storan: " + storan.toLocaleString('id-ID');
             document.getElementById('hasil9persen').innerText = "9% Drop: " + persen9.toLocaleString('id-ID');
-            document.getElementById('hasilSelisih').innerText = "Selisih: " + selisih.toLocaleString('id-ID');
+            document.getElementById('hasilSelisih').innerText = "Tunai: " + tunai.toLocaleString('id-ID');
         }
     </script>
 </body>
